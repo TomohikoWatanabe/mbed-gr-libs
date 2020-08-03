@@ -158,7 +158,7 @@ void PwmOutSpeaker::sound_out(void) {
 
 void PwmOutSpeaker::audio_process() {
     while (true) {
-        _sound_out_req.wait();
+        _sound_out_req.acquire();
         if (_top != _bottom) {
             if (_speaker_l != NULL) {
                 _speaker_l->write(_pwm_duty_buf[_top + 0]);

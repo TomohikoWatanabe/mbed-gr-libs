@@ -311,9 +311,9 @@ JPEG_Converter::decode(void* pJpegBuff, bitmap_buff_info_t* psOutputBuff, decode
         }
         // Get mutex
         if (pOptions->p_DecodeCallBackFunc == NULL) {
-            jpeg_converter_semaphore.wait(0xFFFFFFFFuL); // WAIT
+            jpeg_converter_semaphore.try_acquire_for(0xFFFFFFFFuL); // WAIT
         } else {
-            if (!jpeg_converter_semaphore.wait(0)) {
+            if (!jpeg_converter_semaphore.try_acquire_for(0)) {
                 e = JPEG_CONV_BUSY;  // Busy
                 goto  fin;
             }
@@ -479,9 +479,9 @@ JPEG_Converter::encode(bitmap_buff_info_t* psInputBuff, void* pJpegBuff, size_t*
         }
         // Get mutex
         if ( pOptions->p_EncodeCallBackFunc == NULL ) {
-            jpeg_converter_semaphore.wait(0xFFFFFFFFuL); // WAIT
+            jpeg_converter_semaphore.try_acquire_for(0xFFFFFFFFuL); // WAIT
         } else {
-            if (!jpeg_converter_semaphore.wait(0)) {
+            if (!jpeg_converter_semaphore.try_acquire_for(0)) {
                 e = JPEG_CONV_BUSY;  // Busy
                 goto  fin;
             }

@@ -154,7 +154,6 @@ spea_error_t SPEA_WindowOffsetCheckPrm (
     const uint16_t             offset_y)
 {
     spea_error_t spea_error = SPEA_OK;
-    volatile uint32_t temp_address;
 
     spea_error = SPEA_CreateSurfaceIDCheckPrm(layer_id);
     if( SPEA_OK != spea_error)
